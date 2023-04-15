@@ -17,7 +17,7 @@ private class DataGenerationTest {
       Test.startTest();
           accts = [SELECT Id FROM Account];
       Test.stopTest();
-      System.assert(accts.size() > 0, 'Was expecting to find at least one account created on the Test Setup');
+      Assert.areNotEqual(accts.size(), 0,'Was expecting to find at least one account created on the Test Setup');
   }
   @isTest
   static void testUseTestFactoryToCreateAccountsWithContacts() {
@@ -28,13 +28,13 @@ private class DataGenerationTest {
           accts = [SELECT Id FROM Account];
           contacts = [SELECT Id FROM Contact];
       Test.stopTest();
-      System.assert(accts.size() > 0, 'Was expecting to find at least one account created');
-      System.assert(contacts.size() == 6, 'Was expecting to find 6 contacts');
-      System.assertNotEquals(accts.size(), contacts.size(), 'Was expecting there to be a different number of account and contacts');
+      Assert.isNotNull(accts, 'Was expecting to find at least one account created');
+      Assert.areEqual(contacts.size(), 6, 'Was expecting to find 6 contacts');
+      Assert.areNotEqual(accts.size(), contacts.size(), 'Was expecting there to be a different number of account and contacts');
   }
   @isTest
   static void testAtTestSetupMethodsRule() {
       List<Opportunity> opps = [SELECT Id, AccountId FROM Opportunity];
-      System.assertEquals(1, opps.size(), 'Expected test to find a single Opp');
+      Assert.areEqual(1, opps.size(), 'Expected test to find a single Opp');
   }
 }
